@@ -19,3 +19,11 @@
 '''
 
 IP = '192.168.3.1'
+
+#Разбиваем строку на список, делаем из списка строк список чисел. Выводи с форматированием.
+#Форматирование со списком из аргументов не работает.
+IP = '192.168.3.1'
+toprint = IP.split('.')
+int_list = list(int(i) for i in toprint)
+print('{:<10} {:<10} {:<10} {:<10}'.format(int_list[0], int_list[1], int_list[2], int_list[3]))
+print('{:<10b} {:<10b} {:<10b} {:<10b}'.format(int_list[0], int_list[1], int_list[2], int_list[3]))
