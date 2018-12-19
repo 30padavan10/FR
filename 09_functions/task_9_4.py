@@ -36,3 +36,32 @@ def ignore_command(command, ignore):
     * False - если нет
     '''
     return any(word in command for word in ignore)
+
+
+def nest_command(file):
+    ''' суть функции в том, что она проходится отдельно по каждой строке по очереди
+в случае команды первого уровня: 1. добавляется эта команда в словарь как ключ и создается
+пустой список. 2. Эта строка записывается в новую переменную key.
+При появлении команды второго уровня, чтобы попать в уже созданный список, в качестве ключа
+используется переменная созданная из комманды первого уровня. Логика не нарушается т.к. при
+появлении другой вложенной команды переменная key уже обновится на нужную вышестоящую команду. 
+''' 
+    result = {}
+    with open(file) as src:
+        for line in src:
+            if line.startswith('!'):
+                pass
+            elif line == '\n':                  #убираем пустые строки
+                pass
+            elif ignore_command(line, ignore):  #используем функцию ignore_command
+                pass
+            elif line.startswith(' '):
+                result[key].append(line.strip())
+            else:
+                key = line.strip()
+                result.update({line.strip():[]})
+    print(result)
+    return result
+
+
+nest_command('config_sw1.txt')
